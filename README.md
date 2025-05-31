@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Status](https://img.shields.io/badge/Status-Active-success.svg)
 
-**Auteur**: [VOTRE NOM COMPLET]  
+**Auteur**: [BAHYOUL Amine]  
 **Version**: 1.0.0  
 **Date**: Janvier 2025  
 **Contexte**: Projet DevOps - Analyse automatique de logs
@@ -35,7 +35,7 @@ Python 3.7 ou supérieur
 Aucune dépendance externe requise
 Installation
 bash# Clonage du repository
-git clone https://github.com/[VOTRE-USERNAME]/log-analyzer
+git clone https://github.com/BhlHk/log-analyzer
 cd log-analyzer
 
 # Rendre le script exécutable (Linux/Mac)

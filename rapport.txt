@@ -1,0 +1,14 @@
+=== RAPPORT D'ANALYSE DES LOGS ===
+Généré le         : 2025-05-31 10:11:26
+Fichier analysé   : log.txt
+
+📊 STATISTIQUES:
+- Erreurs (ERROR)       : 5
+- Avertissements (WARNING): 5
+- Informations (INFO)   : 8
+- Total des entrées     : 18
+
+🎲 NUMÉROS GÉNÉRÉS ALÉATOIREMENT:
+93, 68, 70, 21, 39, 88, 41, 25, 31, 46
+
+=== FIN DU RAPPORT ===
