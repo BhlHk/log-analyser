@@ -18,7 +18,7 @@ except ImportError:
     # Si colorama n'est pas installé, afficher un avertissement et poursuivre sans couleurs
     Fore = Style = type('', (), {'RED': '', 'YELLOW': '', 'GREEN': '', 'CYAN': '', 'RESET_ALL': ''})
     def init(**kwargs): pass
-    print("⚠️  colorama non installé, l'affichage ne sera pas coloré. Pour ajouter les couleurs, installez colorama via 'pip install colorama'.")
+    print("⚠️  note that colorama non installé, l'affichage ne sera pas coloré. Pour ajouter les couleurs, installez colorama via 'pip install colorama'.")
 
 
 class LogAnalyzer:
