@@ -137,7 +137,7 @@ Version 1.0.0 (Janvier 2025)
 Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
 👨‍💻 Auteur
-[VOTRE NOM]
+AMINE BAHYOUL
 
 GitHub: @BhlHk
 Email: bahyoul.amine@gmail.com
