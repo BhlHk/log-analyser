@@ -4,6 +4,7 @@ Log Analyzer CLI Tool avec couleurs dans la console
 Auteur: Amine Bahyoul
 Description: Analyse automatique de fichiers journaux avec sorties colorées
 """
+# Test CI: ajout d'un commentaire
 
 import argparse
 import random
