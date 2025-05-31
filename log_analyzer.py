@@ -1,14 +1,24 @@
 #!/usr/bin/env python3
 """
-Log Analyzer CLI Tool
+Log Analyzer CLI Tool avec couleurs dans la console
 Auteur: Amine Bahyoul
-Description: Analyse automatique de fichiers journaux
+Description: Analyse automatique de fichiers journaux avec sorties colorées
 """
 
 import argparse
 import random
 import sys
 from datetime import datetime
+
+# Ajout de colorama pour gérer les couleurs dans la console
+try:
+    from colorama import init, Fore, Style
+    init(autoreset=True)
+except ImportError:
+    # Si colorama n'est pas installé, afficher un avertissement et poursuivre sans couleurs
+    Fore = Style = type('', (), {'RED': '', 'YELLOW': '', 'GREEN': '', 'CYAN': '', 'RESET_ALL': ''})
+    def init(**kwargs): pass
+    print("⚠️  colorama non installé, l'affichage ne sera pas coloré. Pour ajouter les couleurs, installez colorama via 'pip install colorama'.")
 
 
 class LogAnalyzer:
@@ -40,7 +50,7 @@ class LogAnalyzer:
 
         with open(self.log_file, "w", encoding="utf-8") as f:
             f.write("\n".join(log_entries))
-        print(f"📝 Exemple de log généré dans `{self.log_file}`")
+        print(f"{Fore.GREEN}📝 Exemple de log généré dans `{self.log_file}`{Style.RESET_ALL}")
 
     def analyze_logs(self) -> bool:
         """Analyse le fichier de logs ligne par ligne."""
@@ -53,8 +63,17 @@ class LogAnalyzer:
                             self.stats[level] += 1
             return True
         except FileNotFoundError:
-            print(f"❌ Fichier `{self.log_file}` non trouvé")
+            print(f"{Fore.RED}❌ Fichier `{self.log_file}` non trouvé{Style.RESET_ALL}")
             return False
+
+    def display_stats(self):
+        """Affiche les statistiques avec couleurs."""
+        print(f"{Fore.CYAN}\n📊 STATISTIQUES DE L'ANALYSE :{Style.RESET_ALL}")
+        print(f"{Fore.RED}- Erreurs (ERROR)       : {self.stats['ERROR']}{Style.RESET_ALL}")
+        print(f"{Fore.YELLOW}- Avertissements (WARNING): {self.stats['WARNING']}{Style.RESET_ALL}")
+        print(f"{Fore.GREEN}- Informations (INFO)   : {self.stats['INFO']}{Style.RESET_ALL}")
+        total = sum(self.stats.values())
+        print(f"{Fore.CYAN}- Total des entrées     : {total}{Style.RESET_ALL}\n")
 
     def generate_report(self):
         """Génère le rapport d'analyse (`rapport.txt`)."""
@@ -83,16 +102,16 @@ class LogAnalyzer:
         with open("rapport.txt", "w", encoding="utf-8") as f:
             f.write(report_content)
 
-        print("✅ Rapport généré: `rapport.txt`")
+        print(f"{Fore.GREEN}✅ Rapport généré: `rapport.txt`{Style.RESET_ALL}")
 
         # Condition d'échec pour CI/CD si trop d'erreurs
         if self.stats["ERROR"] > 5:
-            print(f"❌ ERREUR: Trop d'erreurs détectées ({self.stats['ERROR']} > 5)")
+            print(f"{Fore.RED}❌ ERREUR: Trop d'erreurs détectées ({self.stats['ERROR']} > 5){Style.RESET_ALL}")
             sys.exit(1)
 
     def run(self):
         """Exécute l’analyse complète."""
-        print("🔍 Démarrage de l’analyse des logs...")
+        print(f"{Fore.CYAN}🔍 Démarrage de l’analyse des logs...{Style.RESET_ALL}")
 
         # Si le fichier n'existe pas, on génère un log d'exemple
         try:
@@ -101,10 +120,11 @@ class LogAnalyzer:
         except FileNotFoundError:
             self.generate_sample_log()
 
-        # Analyse et génération du rapport
+        # Analyse et affichage des statistiques couleur
         if self.analyze_logs():
+            self.display_stats()
             self.generate_report()
-            print("✅ Analyse terminée avec succès!")
+            print(f"{Fore.GREEN}✅ Analyse terminée avec succès!{Style.RESET_ALL}")
         else:
             sys.exit(1)
 
